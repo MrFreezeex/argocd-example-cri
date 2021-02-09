@@ -1,0 +1,20 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: main-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+    name: in-cluster
+  source:
+    repoURL: "https://github.com/MrFreezeex/argocd-example-cri.git"
+    targetRevision: HEAD
+    path: '.'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
